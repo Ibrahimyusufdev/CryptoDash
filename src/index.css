@@ -1,0 +1,27 @@
+/* Importing open sans font from google font */
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html,
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-darkRed w-full rounded-lg px-4 py-2 text-white transition duration-300;
+  }
+  .btn-secondary {
+    @apply rounded-lg bg-red-600 px-4 py-2 font-semibold text-white;
+  }
+
+  .input-field {
+    @apply w-full rounded border px-4 py-2 sm:w-auto;
+  }
+}
