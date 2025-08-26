@@ -87,4 +87,3 @@ export const CryptoChartContainer = () => {
   );
 };
 
-export default CryptoChartContainer;

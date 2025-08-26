@@ -127,4 +127,3 @@ export const CryptoCard = () => {
   );
 };
 
-export default CryptoCard;

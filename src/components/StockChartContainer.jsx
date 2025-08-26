@@ -67,4 +67,3 @@ export const StockChartContainer = () => {
   );
 };
 
-export default StockChartContainer;

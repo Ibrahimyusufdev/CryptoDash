@@ -117,4 +117,3 @@ export const PriceChart = ({ chartData, label = "Price (USD)" }) => {
   );
 };
 
-export default PriceChart;
