@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Search, TrendingUp, BarChart3, DollarSign, Activity, RefreshCw } from "lucide-react";
-import SearchBar from "./SearchBar";
-import StockSearchBar from "./StockSearchBar";
-import CryptoCard from "./CryptoCard";
-import StockCard from "./StockCard";
-import CryptoChartContainer from "./CryptoChartContainer";
-import StockChartContainer from "./StockChartContainer";
-import ThemeToggle from "./ThemeToggle";
+import { SearchBar } from "./SearchBar";
+import { StockSearchBar } from "./StockSearchBar";
+import { CryptoCard } from "./CryptoCard";
+import { StockCard } from "./StockCard";
+import { CryptoChartContainer } from "./CryptoChartContainer";
+import { StockChartContainer } from "./StockChartContainer";
+import ThemeToggle  from "./ThemeToggle";
 
 export const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("crypto");
@@ -179,7 +179,6 @@ export const Dashboard = () => {
 
           {/* Right Card: Chart */}
           <div className="mb-20 rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:p-6">
-          
             <div className="h-64 sm:h-80">
               {activeTab === "crypto" ? <CryptoChartContainer /> : <StockChartContainer />}
             </div>
@@ -297,36 +296,30 @@ export const Dashboard = () => {
 
       {/* Footer */}
       <footer className="mt-12 border-t border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-800">
-  <div className="container mx-auto flex flex-col items-center justify-between gap-3 px-4 py-6 sm:flex-row sm:gap-4">
-    <p className="text-xs text-gray-600 dark:text-gray-400 sm:text-sm">
-      © 2025 CryptoDash. Real-time financial data.
-    </p>
-    <span className="text-xs text-gray-600 dark:text-gray-400 sm:text-sm flex items-center gap-1">
-      Data provided by CoinGecko & Alpha Vantage
-    </span>
-    <a
-      href="https://github.com/ibrahimyusufdev"
-      target="_blank"
-      rel="noopener noreferrer"
-      className="flex items-center gap-1 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-xs sm:text-sm"
-    >
-      <svg
-        className="h-4 w-4"
-        fill="currentColor"
-        viewBox="0 0 24 24"
-        aria-hidden="true"
-      >
-        <path
-          fillRule="evenodd"
-          d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.016-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.304.76-1.604-2.665-.304-5.467-1.332-5.467-5.931 0-1.31.468-2.382 1.235-3.222-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.29-1.552 3.296-1.23 3.296-1.23.654 1.653.243 2.873.12 3.176.77.84 1.232 1.912 1.232 3.222 0 4.609-2.807 5.625-5.479 5.921.429.37.813 1.096.813 2.21 0 1.595-.015 2.882-.015 3.27 0 .32.216.694.825.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"
-          clipRule="evenodd"
-        />
-      </svg>
-      Developed by Ibrahim Yusuf
-    </a>
-  </div>
-</footer>
-
+        <div className="container mx-auto flex flex-col items-center justify-between gap-3 px-4 py-6 sm:flex-row sm:gap-4">
+          <p className="text-xs text-gray-600 dark:text-gray-400 sm:text-sm">
+            © 2025 CryptoDash. Real-time financial data.
+          </p>
+          <span className="flex items-center gap-1 text-xs text-gray-600 dark:text-gray-400 sm:text-sm">
+            Data provided by CoinGecko & Alpha Vantage
+          </span>
+          <a
+            href="https://github.com/ibrahimyusufdev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-1 text-xs text-gray-600 transition-colors hover:text-gray-900 dark:text-gray-400 dark:hover:text-white sm:text-sm"
+          >
+            <svg className="h-4 w-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                fillRule="evenodd"
+                d="M12 0C5.37 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.016-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.084 1.84 1.236 1.84 1.236 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.304.76-1.604-2.665-.304-5.467-1.332-5.467-5.931 0-1.31.468-2.382 1.235-3.222-.124-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.3 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.29-1.552 3.296-1.23 3.296-1.23.654 1.653.243 2.873.12 3.176.77.84 1.232 1.912 1.232 3.222 0 4.609-2.807 5.625-5.479 5.921.429.37.813 1.096.813 2.21 0 1.595-.015 2.882-.015 3.27 0 .32.216.694.825.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"
+                clipRule="evenodd"
+              />
+            </svg>
+            Developed by Ibrahim Yusuf
+          </a>
+        </div>
+      </footer>
     </div>
   );
 };

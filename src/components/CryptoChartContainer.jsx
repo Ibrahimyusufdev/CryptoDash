@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useAppStore } from "../store/useAppStore";
 import { useCryptoHistory } from "../hooks/useCryptoHistory";
-import PriceChart from "./PriceChart";
+import {PriceChart} from "./PriceChart";
 import { LoadingSpin } from "./LoadingSpin";
 import { TrendingUp } from "lucide-react";
 
