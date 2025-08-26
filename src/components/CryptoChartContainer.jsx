@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAppStore } from "../store/useAppStore";
 import { useCryptoHistory } from "../hooks/useCryptoHistory";
 import PriceChart from "./PriceChart";
@@ -7,7 +7,13 @@ import { TrendingUp } from "lucide-react";
 
 export const CryptoChartContainer = () => {
   const selectedCrypto = useAppStore((s) => s.selectedCrypto);
-  const { data, isLoading, error } = useCryptoHistory(selectedCrypto?.id, 7);
+  const [chartRange, setChartRange] = useState("7D");
+
+  // Map range labels to days for fetching data
+  const rangeMapping = { "24H": 1, "7D": 7, "30D": 30, "1Y": 365 };
+  const days = rangeMapping[chartRange];
+
+  const { data, isLoading, error } = useCryptoHistory(selectedCrypto?.id, days);
 
   if (!selectedCrypto) {
     return (
@@ -45,18 +51,32 @@ export const CryptoChartContainer = () => {
         <div className="flex items-center gap-2">
           <TrendingUp className="h-4 w-4 sm:h-5 sm:w-5 text-blue-500" />
           <h3 className="text-base sm:text-lg font-semibold text-gray-800 dark:text-white">
-            {selectedCrypto.name} Price (7d)
+            {selectedCrypto.name} Price ({chartRange})
           </h3>
         </div>
-        <span className="self-start sm:self-auto rounded-md bg-gray-100 px-2 py-0.5 text-[11px] sm:text-xs text-gray-600 
-                         dark:bg-gray-800 dark:text-gray-400">
-          vs USD
-        </span>
+
+        {/* Range Buttons */}
+        <div className="flex flex-wrap gap-2 mt-2 sm:mt-0">
+          {["24H", "7D", "30D", "1Y"].map((range) => (
+            <button
+              key={range}
+              onClick={() => setChartRange(range)}
+              className={`rounded-lg border px-3 py-1 text-xs transition
+                ${
+                  chartRange === range
+                    ? "border-blue-500 bg-blue-500 text-white"
+                    : "border-gray-300 bg-gray-50 text-gray-700 hover:bg-blue-500 hover:text-white dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200"
+                }`}
+            >
+              {range}
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Chart */}
       <div className="h-56 sm:h-64">
-        <PriceChart chartData={data} label={`${selectedCrypto.name} (7d)`} />
+        <PriceChart chartData={data} label={`${selectedCrypto.name} (${chartRange})`} />
       </div>
 
       {/* Footer */}

@@ -11,7 +11,6 @@ import ThemeToggle from "./ThemeToggle";
 export const Dashboard = () => {
   const [activeTab, setActiveTab] = useState("crypto");
   const [lastRefresh, setLastRefresh] = useState(new Date());
-  const [chartRange, setChartRange] = useState("24H");
 
   // Auto-refresh timestamp
   useEffect(() => {
@@ -163,55 +162,32 @@ export const Dashboard = () => {
 
         {/* Grid */}
         {/* Grid: Details + Chart */}
-       {/* Grid: Details + Chart */}
-<div className="grid gap-4 sm:gap-6 grid-cols-1">
-  {/* Left Card: Details */}
-  <div className="p-4 sm:p-6 rounded-xl border bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-    <div className="flex items-center justify-between mb-4">
-      <h3 className="font-semibold text-base sm:text-lg">
-        {activeTab === "crypto" ? "Crypto Details" : "Stock Details"}
-      </h3>
-      <div className="px-3 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 dark:bg-blue-900/40 dark:text-blue-400">
-        Live Data
-      </div>
-    </div>
-    {activeTab === "crypto" ? <CryptoCard /> : <StockCard />}
-  </div>
+        {/* Grid: Details + Chart */}
+        <div className="grid grid-cols-1 gap-4 sm:gap-6">
+          {/* Left Card: Details */}
+          <div className="rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:p-6">
+            <div className="mb-4 flex items-center justify-between">
+              <h3 className="text-base font-semibold sm:text-lg">
+                {activeTab === "crypto" ? "Crypto Details" : "Stock Details"}
+              </h3>
+              <div className="rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/40 dark:text-blue-400">
+                Live Data
+              </div>
+            </div>
+            {activeTab === "crypto" ? <CryptoCard /> : <StockCard />}
+          </div>
 
-  {/* Right Card: Chart */}
-  <div className="p-4 sm:p-6 rounded-xl border bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-700">
-    <div className="flex items-center justify-between mb-4 flex-col sm:flex-row gap-2">
-      <h3 className="font-semibold text-base sm:text-lg">Price Chart</h3>
-      <div className="flex space-x-2">
-        {["24H", "7D", "30D", "1Y"].map((range) => (
-          <button
-            key={range}
-            onClick={() => setChartRange(range)}
-            className={`px-3 py-1 text-xs rounded-lg border transition
-              ${
-                chartRange === range
-                  ? "bg-blue-500 text-white border-blue-500"
-                  : "bg-gray-50 text-gray-700 dark:bg-gray-700 dark:text-gray-200 border-gray-300 dark:border-gray-600 hover:bg-blue-500 hover:text-white"
-              }`}
-          >
-            {range}
-          </button>
-        ))}
-      </div>
-    </div>
-    <div className="h-64 sm:h-80">
-      {activeTab === "crypto" ? (
-        <CryptoChartContainer />
-      ) : (
-        <StockChartContainer />
-      )}
-    </div>
-  </div>
-</div>
-
+          {/* Right Card: Chart */}
+          <div className="mb-20 rounded-xl border border-gray-200 bg-white p-4 dark:border-gray-700 dark:bg-gray-800 sm:p-6">
+          
+            <div className="h-64 sm:h-80">
+              {activeTab === "crypto" ? <CryptoChartContainer /> : <StockChartContainer />}
+            </div>
+          </div>
+        </div>
 
         {/* Stats Grid */}
-        <div className="mt-6 grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-4 sm:gap-6">
+        <div className="mt-20 grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-4 sm:gap-6">
           {[
             {
               title: "Market Status",
