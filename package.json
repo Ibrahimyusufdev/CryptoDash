@@ -13,6 +13,8 @@
     "@tanstack/react-query": "^5.85.5",
     "axios": "^1.11.0",
     "chart.js": "^4.5.0",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "date-fns": "^4.1.0",
     "immer": "^10.1.1",
     "lucide-react": "^0.542.0",
     "middleware": "^1.0.0",

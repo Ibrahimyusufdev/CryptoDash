@@ -8,6 +8,11 @@ export const useAppStore = create((set) => ({
   // stock selection
   selectedStock: null,
   setSelectedStock: (stock) => set({ selectedStock: stock }),
+
+  toggleTheme: () =>
+    set((state) => ({
+      theme: state.theme === "light" ? "dark" : "light",
+    })),
 }));
 
 export default useAppStore;
