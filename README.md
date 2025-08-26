@@ -38,8 +38,8 @@ An enterprise-level **React dashboard app** for monitoring **stocks and cryptocu
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/stock-crypto-dashboard.git
-cd stock-crypto-dashboard
+git clone https://github.com/Ibrahimyusufdev/CryptoDash.git
+cd CryptoDash
 ```
 
 ### 2. Install Dependencies
