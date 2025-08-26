@@ -1,13 +1,6 @@
-import {QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { SearchBar } from "./components/SearchBar";
+import React from "react";
+import { Dashboard } from "./components/Dashboard";
 
-const queryClient = new QueryClient();
-
-export const App = () => {
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <SearchBar />
-    </QueryClientProvider>
-  )
+export default function App() {
+  return <Dashboard />;
 }

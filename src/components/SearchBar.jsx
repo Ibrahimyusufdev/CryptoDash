@@ -1,54 +1,60 @@
-// src/components/SearchBar.jsx
-import { useState } from "react";
-import { useSearchCrypto } from "../hooks/useCryptoData";
+import React, { useState } from "react";
+import { useSearchCrypto } from "../hooks/useSearchCrypto";
 import { useAppStore } from "../store/useAppStore";
 import { LoadingSpin } from "./LoadingSpin";
 
 export const SearchBar = () => {
   const [query, setQuery] = useState("");
-  const { data, isLoading } = useSearchCrypto(query);
-  const setSelectedCrypto = useAppStore((state) => state.setSelectedCrypto);
+  const { data, error, isLoading } = useSearchCrypto(query);
+  const setSelectedCrypto = useAppStore((s) => s.setSelectedCrypto);
 
   const handleSelect = (coin) => {
-    setSelectedCrypto(coin); // save selected coin
-    setQuery(""); // clear input
+    setSelectedCrypto(coin);
+    setQuery("");
   };
 
   return (
-    <section className="mt-4">
-      <article className="container mx-auto px-4">
-        <div className="relative w-full max-w-md">
-          <input
-            type="search"
-            placeholder="Search Crypto (e.g. Bitcoin)"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="w-full rounded-md border p-2 shadow-sm"
-          />
+    <div className="mx-auto mt-4 max-w-md">
+      <input
+        className="w-full rounded-md border p-2"
+        placeholder="Search Crypto (name or symbol)"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
 
-          {/* Suggestions */}
-          {query && (
-            <ul className="absolute z-10 max-h-60 w-full overflow-y-auto rounded-md border bg-white shadow-md">
-              {isLoading && <li><LoadingSpin /></li>}
-
-              {data?.length === 0 && <li className="p-2">No results found</li>}
-
-              {data?.map((coin) => (
-                <li
-                  key={coin.id}
-                  className="flex cursor-pointer items-center gap-2 p-2 hover:bg-gray-100"
-                  onClick={() => handleSelect(coin)}
-                >
-                  <img src={coin.thumb} alt={coin.name} className="h-5 w-5" />
-                  <span>
-                    {coin.name} ({coin.symbol.toUpperCase()})
-                  </span>
-                </li>
-              ))}
-            </ul>
+      {query && (
+        <ul className="z-10 mt-2 max-h-60 overflow-auto rounded-md border bg-white shadow-md">
+          {isLoading && (
+            <li className="p-2">
+              <LoadingSpin />
+            </li>
           )}
-        </div>
-      </article>
-    </section>
+          {error && <li className="p-2 text-red-500">Failed to fetch</li>}
+          {!isLoading && !error && data?.length === 0 && <li className="p-2">No results</li>}
+          {!isLoading &&
+            !error &&
+            data?.map((c) => (
+              <li
+                key={c.id}
+                onClick={() => handleSelect(c)}
+                className="flex cursor-pointer items-center gap-3 p-2 hover:bg-gray-100"
+              >
+                <img src={c.thumb} alt={c.symbol} className="h-5 w-5 rounded-full" />
+                <div>
+                  <div className="font-medium">
+                    {c.name}{" "}
+                    <span className="text-xs text-gray-500">({c.symbol.toUpperCase()})</span>
+                  </div>
+                  <div className="text-xs text-gray-400">
+                    {c.market_cap_rank ? `#${c.market_cap_rank}` : ""}
+                  </div>
+                </div>
+              </li>
+            ))}
+        </ul>
+      )}
+    </div>
   );
 };
+
+export default SearchBar;
